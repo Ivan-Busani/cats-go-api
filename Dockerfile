@@ -18,7 +18,7 @@ WORKDIR /app
 COPY go.mod ./
 RUN go mod download
 COPY . .
-RUN CGO_ENABLED=0 go build -o server .
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o server ./cmd/server
 
 # Run stage
 FROM alpine:3.19
