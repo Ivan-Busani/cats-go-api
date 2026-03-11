@@ -27,7 +27,7 @@ func NewPostgresCatRepository(db *sql.DB) CatRepository {
 
 func (r *postgresCatRepository) FindAll(ctx context.Context) ([]model.Cat, error) {
 	rows, err := r.db.QueryContext(ctx,
-		`SELECT id, cat_id, url, width, height, breeds, api_used, created_at, updated_at FROM cats`)
+		`SELECT id, cat_id, url, width, height, breeds, api_used, created_at, updated_at FROM cats ORDER BY id DESC`)
 	if err != nil {
 		return nil, err
 	}
