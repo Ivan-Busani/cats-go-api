@@ -28,8 +28,8 @@ func main() {
 	mux.HandleFunc("PUT /api/v1/cats/update/{id}", catHandler.Update)
 	mux.HandleFunc("DELETE /api/v1/cats/delete/{id}", catHandler.Delete)
 
-	fmt.Println("Server is running on port 8080")
-	if err := http.ListenAndServe(":8080", mux); err != nil {
+	fmt.Println("Server is running on port 8001")
+	if err := http.ListenAndServe(":8001", mux); err != nil {
 		log.Fatal(err)
 	}
 }

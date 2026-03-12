@@ -33,7 +33,7 @@ func (r *postgresCatRepository) FindAll(ctx context.Context) ([]model.Cat, error
 	}
 	defer rows.Close()
 
-	var cats []model.Cat
+	cats := []model.Cat{}
 	for rows.Next() {
 		var c model.Cat
 		var breedsRaw []byte
