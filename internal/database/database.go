@@ -1,15 +1,15 @@
 package database
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"os"
 
+	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 )
 
-func NewPostgres() (*sql.DB, error) {
+func NewPostgres() (*sqlx.DB, error) {
 	dsn := fmt.Sprintf(
 		"postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		os.Getenv("POSTGRES_USER"),
@@ -19,7 +19,7 @@ func NewPostgres() (*sql.DB, error) {
 		os.Getenv("POSTGRES_DB"),
 	)
 
-	db, err := sql.Open("postgres", dsn)
+	db, err := sqlx.Open("postgres", dsn)
 	if err != nil {
 		return nil, fmt.Errorf("opening db: %w", err)
 	}
@@ -31,7 +31,7 @@ func NewPostgres() (*sql.DB, error) {
 	return db, nil
 }
 
-func MustNewPostgres() *sql.DB {
+func MustNewPostgres() *sqlx.DB {
 	db, err := NewPostgres()
 	if err != nil {
 		log.Fatalf("database: %v", err)

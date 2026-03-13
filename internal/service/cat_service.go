@@ -7,17 +7,17 @@ import (
 
 	"github.com/lib/pq"
 
+	"cats-go-api/internal/domain"
 	"cats-go-api/internal/model"
-	"cats-go-api/internal/repository"
 )
 
 var ErrDuplicateCat = errors.New("duplicate cat")
 
 type CatService struct {
-	repo repository.CatRepository
+	repo domain.CatRepository
 }
 
-func NewCatService(repo repository.CatRepository) *CatService {
+func NewCatService(repo domain.CatRepository) *CatService {
 	return &CatService{repo: repo}
 }
 
