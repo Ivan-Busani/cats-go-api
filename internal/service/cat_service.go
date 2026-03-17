@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/lib/pq"
+	"gorm.io/gorm"
 
 	"cats-go-api/internal/domain"
 	"cats-go-api/internal/model"
@@ -36,7 +36,7 @@ func (s *CatService) GetByCatID(ctx context.Context, catID string) (*model.Cat, 
 func (s *CatService) Save(ctx context.Context, input model.SaveCatInput) (*model.Cat, error) {
 	cat, err := s.repo.Create(ctx, input, "go")
 	if err != nil {
-		if pqErr, ok := err.(*pq.Error); ok && pqErr.Code == "23505" {
+		if errors.Is(err, gorm.ErrDuplicatedKey) {
 			return nil, ErrDuplicateCat
 		}
 		return nil, err

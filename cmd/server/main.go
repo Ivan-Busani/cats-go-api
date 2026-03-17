@@ -13,7 +13,7 @@ import (
 
 func main() {
 	db := database.MustNewPostgres()
-	defer db.Close()
+	defer database.CloseDB(db)
 
 	catRepo := repository.NewPostgresCatRepository(db)
 	catSvc := service.NewCatService(catRepo)

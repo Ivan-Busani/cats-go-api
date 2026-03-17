@@ -3,18 +3,24 @@ package model
 import (
 	"encoding/json"
 	"time"
+
+	"gorm.io/datatypes"
 )
 
 type Cat struct {
-	ID        int             `json:"id"         db:"id"`
-	CatID     string          `json:"cat_id"     db:"cat_id"`
-	URL       string          `json:"url"        db:"url"`
-	Width     int             `json:"width"      db:"width"`
-	Height    int             `json:"height"     db:"height"`
-	Breeds    json.RawMessage `json:"breeds"     db:"breeds"`
-	APIUsed   *string         `json:"api_used"   db:"api_used"`
-	CreatedAt *time.Time      `json:"created_at" db:"created_at"`
-	UpdatedAt *time.Time      `json:"updated_at" db:"updated_at"`
+	ID        int            `json:"id"         gorm:"column:id;primaryKey;autoIncrement"`
+	CatID     string         `json:"cat_id"     gorm:"column:cat_id"`
+	URL       string         `json:"url"        gorm:"column:url"`
+	Width     int            `json:"width"      gorm:"column:width"`
+	Height    int            `json:"height"     gorm:"column:height"`
+	Breeds    datatypes.JSON `json:"breeds"     gorm:"column:breeds"`
+	APIUsed   *string        `json:"api_used"   gorm:"column:api_used"`
+	CreatedAt *time.Time     `json:"created_at" gorm:"column:created_at"`
+	UpdatedAt *time.Time     `json:"updated_at" gorm:"column:updated_at"`
+}
+
+func (Cat) TableName() string {
+	return "cats"
 }
 
 type SaveCatInput struct {
