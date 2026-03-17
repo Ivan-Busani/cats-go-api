@@ -3,7 +3,6 @@ module cats-go-api
 go 1.26.0
 
 require (
-	github.com/lib/pq v1.11.2
 	gorm.io/datatypes v1.2.7
 	gorm.io/driver/postgres v1.6.0
 	gorm.io/gorm v1.31.1
